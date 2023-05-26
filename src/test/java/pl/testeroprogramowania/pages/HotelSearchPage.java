@@ -63,9 +63,17 @@ public class HotelSearchPage {
         hotelSuggestionList.click();
     }
 
-    public void setDate(String checkin, String checkout) {
-        checkinInput.sendKeys(checkin);
-        checkoutInput.sendKeys(checkout);
+    public void setDate() {
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        String todayAsString = dateFormat.format(today);
+        String tomorrowAsString = dateFormat.format(tomorrow);
+        checkinInput.sendKeys(todayAsString);
+        checkoutInput.sendKeys(tomorrowAsString);
         searchButton.click();
     }
 
@@ -85,6 +93,7 @@ public class HotelSearchPage {
 
     public void clickSignUp() {
         signUp.get(1).click();
-    }
 
+
+    }
 }

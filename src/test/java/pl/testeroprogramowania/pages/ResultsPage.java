@@ -21,7 +21,6 @@ public class ResultsPage {
     @FindBy(className = "RTL")
     public WebElement welcomeTextAfterLogin;
 
-
     public ResultsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
