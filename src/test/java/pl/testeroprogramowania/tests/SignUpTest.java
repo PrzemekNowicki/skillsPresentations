@@ -23,8 +23,8 @@ public class SignUpTest extends BaseTest {
         user.setFirstName("Jan")
                 .setLastName("Testowy")
                 .setPhone("666666666")
+                .setPassword("Testowe123")
                 .completeRandomEmail();
-        user.setPassword("Testowe123");
 
         signUpPage.completeSignUpFormWithRandomEmail(user);
 

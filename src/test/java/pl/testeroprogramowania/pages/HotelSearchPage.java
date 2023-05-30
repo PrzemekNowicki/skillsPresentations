@@ -81,16 +81,23 @@ public class HotelSearchPage {
         return this;
     }
 
+    public HotelSearchPage setTravellers(int adultsToAdd, int childToAdd) {
+        travellersInput.click();
+        addTraveler(adultPlusButton, adultsToAdd);
+        addTraveler(childPlusButton, childToAdd);
+        return this;
+    }
+
+    private void addTraveler(WebElement travelerBtn, int numberOfTravelers) {
+        for (int i = 0; i < numberOfTravelers; i++) {
+            travelerBtn.click();
+        }
+    }
+
     public ResultsPage searchHotelClick() {
         searchButton.click();
         return new ResultsPage(driver);
     }
-
-//    public setTravellers(int adults, int child) {
-//        travellersInput.click();
-//        adultInput.sendKeys(adults);
-//        childInput.sendKeys(child);
-//    }
 
 
     public HotelSearchPage clickMyAccount() {

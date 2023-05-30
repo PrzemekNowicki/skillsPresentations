@@ -9,11 +9,11 @@ public class HotelSearchTest extends BaseTest {
 
     @Test
     public void searchHotelTest() {
-        ResultsPage resultsPage = new ResultsPage(driver);
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
 
         List<String> hotelNames = hotelSearchPage.setCity("Dubai")
                 .setDate()
+                .setTravellers(2, 3)
                 .searchHotelClick()
                 .getHotelNames();
 
@@ -30,11 +30,10 @@ public class HotelSearchTest extends BaseTest {
     @Test
     public void noFoundHotelResult() {
 
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        ResultsPage resultsPage = new ResultsPage(driver);
-
-        hotelSearchPage.setCity("Warsaw")
+        ResultsPage resultsPage = new HotelSearchPage(driver)
+                .setCity("Warsaw")
                 .setDate()
+                .setTravellers(1, 2)
                 .searchHotelClick();
 
         Assert.assertTrue(resultsPage.textCenter.getText().contains("Results"), "Komunikat nie zawiera słowa Results");
