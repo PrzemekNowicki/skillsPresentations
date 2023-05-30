@@ -53,17 +53,20 @@ public class HotelSearchPage {
     @FindBy(xpath = "//a[contains(text(), '  Sign Up')]")
     public List<WebElement> signUp;
 
+    private WebDriver driver;
     public HotelSearchPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.driver=driver;
     }
 
-    public void setCity(String cityName) {
+    public HotelSearchPage setCity(String cityName) {
         searchHotelSpan.click();
         searchHotelInput.sendKeys(cityName);
         hotelSuggestionList.click();
+        return this;
     }
 
-    public void setDate() {
+    public HotelSearchPage setDate() {
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
@@ -75,24 +78,29 @@ public class HotelSearchPage {
         checkinInput.sendKeys(todayAsString);
         checkoutInput.sendKeys(tomorrowAsString);
         searchButton.click();
+        return this;
     }
 
-    public void searchHotelClick() {
+    public ResultsPage searchHotelClick() {
         searchButton.click();
+        return new ResultsPage(driver);
     }
 
-    public void setTravellers(String adults, String child) {
-        travellersInput.click();
-        adultInput.sendKeys(adults);
-        childInput.sendKeys(child);
-    }
+//    public setTravellers(int adults, int child) {
+//        travellersInput.click();
+//        adultInput.sendKeys(adults);
+//        childInput.sendKeys(child);
+//    }
 
-    public void clickMyAccount() {
+
+    public HotelSearchPage clickMyAccount() {
         myAccount.stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
+        return this;
     }
 
-    public void clickSignUp() {
+    public SignUpPage clickSignUp() {
         signUp.get(1).click();
+        return new SignUpPage(driver);
 
 
     }

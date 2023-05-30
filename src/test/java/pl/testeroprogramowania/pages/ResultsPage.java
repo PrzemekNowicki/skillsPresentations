@@ -18,16 +18,16 @@ public class ResultsPage {
     @FindBy(xpath = "//div[@class='alert alert-danger']")
     public WebElement headingError;
 
-    @FindBy(className = "RTL")
-    public WebElement welcomeTextAfterLogin;
-
+    private WebDriver driver;
     public ResultsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.driver=driver;
     }
 
     public List<String> getHotelNames() {
         return hotelList.stream().map(el -> el.getAttribute("textContent")).collect(Collectors.toList());
     }
+
 
 
 }

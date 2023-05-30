@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pl.testeroprogramowania.testData.User;
 
 import java.util.List;
 
@@ -29,8 +30,11 @@ public class SignUpPage {
     @FindBy(name = "email")
     public WebElement emailField;
 
+    private WebDriver driver;
+
     public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.driver=driver;
     }
 
     public void completeFirstName(String firstName) {
@@ -57,14 +61,33 @@ public class SignUpPage {
         signUpButton.get(2).click();
     }
 
-    public void completeRandomEmail() {
-        int randomNumber = (int) (Math.random() * 1000);
-        String randomEmail = "testNumber" + randomNumber + "@testy.com";
-        emailField.sendKeys(randomEmail);
-    }
+
 
     public void completeEmail(String email) {
         emailField.sendKeys(email);
+    }
+
+    public void completeSignUpFormWithRandomEmail(User user){
+        firstNameField.sendKeys(user.getFirstName());
+        lastNameField.sendKeys(user.getLastName());
+        phoneField.sendKeys(user.getPhone());
+        emailField.sendKeys(user.completeRandomEmail());
+        passwordField.sendKeys(user.getPassword());
+        confirmPasswordField.sendKeys(user.getPassword());
+        signUpButton.get(2).click();
+
+    }
+
+    public SignUpPage completeSignUpFormWithoutRandomEmail(User user){
+        firstNameField.sendKeys(user.getFirstName());
+        lastNameField.sendKeys(user.getLastName());
+        phoneField.sendKeys(user.getPhone());
+        emailField.sendKeys(user.getEmail());
+        passwordField.sendKeys(user.getPassword());
+        confirmPasswordField.sendKeys(user.getPassword());
+        signUpButton.get(2).click();
+        return this;
+
     }
 
 
